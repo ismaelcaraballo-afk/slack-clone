@@ -3,6 +3,40 @@
 ## Setup
 
 1. Pull latest:
+
+### Database (one-time setup)
+
+You need PostgreSQL running before the backend will work.
+
+```bash
+# Install PostgreSQL
+brew install postgresql@17
+
+# Start it (and auto-start on reboot)
+brew services start postgresql@17
+
+# Create the database
+createdb slack_clone
+
+# Go to the server folder and install dependencies
+cd ~/slack-clone/server
+npm install
+
+# Copy the env file
+cp .env.example .env
+
+# Seed the database (creates tables + default channels)
+npm run seed
+```
+
+You should see: `Channels seeded: [ { id: 1, name: 'general' }, { id: 2, name: 'random' } ]`
+
+If `createdb` is not found, add PostgreSQL to your PATH:
+```bash
+echo 'export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
 ```bash
 cd ~/slack-clone
 git pull origin main
@@ -11,7 +45,7 @@ git pull origin main
 2. Set up the React app:
 ```bash
 cd client
-npx create-react-app . --template default
+npm create vite@latest . -- --template react
 npm install socket.io-client axios react-router-dom
 ```
 
