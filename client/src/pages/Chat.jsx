@@ -44,7 +44,7 @@ export default function Chat() {
     [activeChannel]
   )
 
-  const { sendMessage } = useSocket({
+  const { sendMessage, emitTyping, onlineUsers, typingUsers } = useSocket({
     token,
     channelId: activeChannel?.id,
     onNewMessage: handleNewMessage,
@@ -63,13 +63,15 @@ export default function Chat() {
         onChannelCreated={handleChannelCreated}
         user={user}
         onLogout={logout}
+        onlineUsers={onlineUsers}
       />
       <div className={styles.main}>
-        <ChatHeader channel={activeChannel} />
-        <MessageList messages={messages} />
+        <ChatHeader channel={activeChannel} onlineCount={onlineUsers.length} />
+        <MessageList messages={messages} typingUsers={typingUsers} />
         <MessageInput
           channelName={activeChannel?.name}
           onSendMessage={sendMessage}
+          onTyping={emitTyping}
         />
       </div>
     </div>

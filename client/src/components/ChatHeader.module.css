@@ -40,3 +40,10 @@
   background: var(--slack-hover-bg);
   color: var(--slack-text-primary);
 }
+
+.onlineCount {
+  font-size: 12px;
+  color: #44b078;
+  margin-left: 8px;
+  font-weight: 400;
+}

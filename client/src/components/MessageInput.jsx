@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 import styles from './MessageInput.module.css'
 
-export default function MessageInput({ channelName, onSendMessage }) {
+export default function MessageInput({ channelName, onSendMessage, onTyping }) {
   const [content, setContent] = useState('')
 
   const handleSubmit = (e) => {
@@ -30,6 +30,11 @@ export default function MessageInput({ channelName, onSendMessage }) {
       e.preventDefault()
       handleSubmit(e)
     }
+  }
+
+  const handleChange = (e) => {
+    setContent(e.target.value)
+    if (onTyping) onTyping()
   }
 
   return (
@@ -54,7 +59,7 @@ export default function MessageInput({ channelName, onSendMessage }) {
           <input
             type="text"
             value={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={handleChange}
             onKeyDown={handleKeyDown}
             placeholder={channelName ? `Message #${channelName}` : 'Message...'}
             className={styles.input}

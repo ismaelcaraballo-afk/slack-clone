@@ -15,3 +15,10 @@
   color: var(--slack-text-secondary);
   font-size: 15px;
 }
+
+.typing {
+  padding: 4px 20px 8px;
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+}
